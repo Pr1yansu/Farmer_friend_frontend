@@ -1,13 +1,76 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("./fonts/poppins.css");
+@import url("./fonts/fleurdeleah.css");
+@import url("./fonts/lora.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: "Lora", serif;
+}
+
+h1 {
+    font-family: "Fleur De Leah", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: transparent;
+    color: rgb(41, 41, 41);
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: #E4A951;
+}
+
+.btn-rounded {
+    border-radius: 50px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-rounded-sm {
+    border-radius: 20px;
+}
+
+.captalize {
+    text-transform: capitalize;
+}
+
+.btn.active {
+    background-color: #2D5F4D;
+    color: #ffffff;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }

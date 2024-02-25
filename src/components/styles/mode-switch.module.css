@@ -1,0 +1,18 @@
+.modeSwitchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    gap: 0.5rem;
+}
+
+.modeSwitch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: white;
+    padding: 0.4rem 0.6rem;
+    border-radius: 30px;
+    box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.40) inset;
+}

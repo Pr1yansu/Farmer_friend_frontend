@@ -1,0 +1,53 @@
+.navbar {
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.3s;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+}
+
+.navItem {
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.navItem>a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.3s;
+}
+
+.navItem>a:hover {
+    color: #ff6b6b;
+}
+
+.login {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.loggedIn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
