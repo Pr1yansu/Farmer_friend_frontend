@@ -24,7 +24,7 @@
     width: auto;
     height: auto;
     z-index: -99;
-    background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.60) 100%);
+    background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.50) 100%);
 }
 
 .homeSection {
@@ -36,6 +36,8 @@
 
 .headText {
     position: relative;
+    max-width: 1200px;
+    width: 100%;
     padding: 20px;
 }
 
@@ -50,7 +52,7 @@
 
 .headText>h1 {
     font-size: 8.5rem;
-    font-weight: 700;
+    font-weight: 400;
     color: #366E5A;
     text-align: center;
 }
@@ -68,6 +70,8 @@
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .homeContent>h2 {
