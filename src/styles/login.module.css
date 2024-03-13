@@ -1,0 +1,160 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #272727;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background: linear-gradient(90deg, rgba(48, 48, 48, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://images.pexels.com/photos/7415326/pexels-photo-7415326.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background: linear-gradient(90deg, rgba(48, 48, 48, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://images.pexels.com/photos/7415326/pexels-photo-7415326.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.register-container .card,
+.login-container .card {
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff0d;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgb(172, 172, 172);
+}
+
+.register-container h2,
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.register-container h2::after,
+.login-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: #000000;
+}
+
+.register-container .form-group,
+.login-container .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.register-container .form-link,
+.login-container .form-link {
+    text-align: end;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #c7c7c7;
+}
+
+.register-container .form-link>span,
+.login-container .form-link>span {
+    color: #000000;
+    cursor: pointer;
+    font-size: medium;
+    transition: all 0.3s;
+}
+
+.register-container label,
+.login-container label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+.register-container input,
+.login-container input {
+    padding: 8px 12px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #e0e0e0;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 400;
+    background-color: transparent;
+    width: 100%;
+}
+
+
+.register-container input:focus,
+.login-container input:focus,
+.register-container input:valid,
+.login-container input:valid {
+    border: 1px solid #505050;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.register-container input::placeholder,
+.login-container input::placeholder {
+    text-transform: capitalize;
+    color: #eaeaea;
+    font-size: 0.9rem;
+}
+
+.register-container button,
+.login-container button {
+    padding: 8px 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    border: 1px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.register-container button:hover,
+.login-container button:hover {
+    background-color: #000000;
+    color: #ffffff;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: 1px solid #000000;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+.password-container div {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-10px);
+    cursor: pointer;
+    color: #ffffff;
+}

@@ -13,16 +13,26 @@
     font-style: normal;
 }
 
+body {
+    background-color: #eaeaea;
+}
+
 button {
     cursor: pointer;
     border: none;
     outline: none;
-    font-family: "Lora", serif;
+    font-family: "Lora", serif !important;
 }
 
 h1 {
     font-family: "Fleur De Leah", cursive;
     font-weight: 400;
+    font-style: normal;
+}
+
+label {
+    font-family: "Lora", sans-serif;
+    font-weight: 600;
     font-style: normal;
 }
 
@@ -38,6 +48,16 @@ h6 {
 
 .btn {
     padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: transparent;
+    color: rgb(41, 41, 41);
+}
+
+.btn-default {
     border-radius: 5px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -73,4 +93,34 @@ h6 {
     background-color: #2D5F4D;
     color: #ffffff;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.animate-spin {
+    animation: spin 0.5s linear infinite;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #000000;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

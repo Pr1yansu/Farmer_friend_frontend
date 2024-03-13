@@ -1,0 +1,32 @@
+.inputBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.inputField {
+    display: flex;
+    padding: 8px 12px;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    color: #3e3e3e;
+}
+
+.inputFieldClose,
+.inputFieldCheck {
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+    padding: 2px;
+    color: #bf820f;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
