@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import ModeSwitchComponent from "../components/ui/mode-switch.jsx";
 import { motion } from "framer-motion";
 import styles from "../styles/home.module.css";
+import {
+  CropInputFields,
+  FertilizerInputFields,
+} from "../components/ui/input-field.jsx";
 
 const options = ["crops", "fertilizer"];
 
 const Home = () => {
   const [mode, setMode] = useState("crops");
-  const [selectMode, setSelectMode] = useState(null);
-  console.log(selectMode);
+  const [selectMode, setSelectMode] = useState();
   return (
     <section className={styles.homeSection}>
       {mode === "crops" && (
@@ -57,12 +60,26 @@ const Home = () => {
           We provide the best solutions for farmers to grow their crops
           efficiently.
         </h2>
-        <ModeSwitchComponent
-          mode={mode}
-          setMode={setMode}
-          options={options}
-          setSelectMode={setSelectMode}
-        />
+        {selectMode === "crops" && (
+          <CropInputFields
+            selectMode={selectMode}
+            setSelectMode={setSelectMode}
+          />
+        )}
+        {selectMode === "fertilizer" && (
+          <FertilizerInputFields
+            selectMode={selectMode}
+            setSelectMode={setSelectMode}
+          />
+        )}
+        {!selectMode && (
+          <ModeSwitchComponent
+            mode={mode}
+            setMode={setMode}
+            options={options}
+            setSelectMode={setSelectMode}
+          />
+        )}
         <div className={styles.homeContentLower}>
           {mode === "crops" ? (
             <h3>
