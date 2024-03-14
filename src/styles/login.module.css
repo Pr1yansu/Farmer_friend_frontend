@@ -7,7 +7,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background: linear-gradient(90deg, rgba(48, 48, 48, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://images.pexels.com/photos/7415326/pexels-photo-7415326.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background: linear-gradient(90deg, rgba(48, 48, 48, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://images.unsplash.com/photo-1581177094826-3b9a100bf887?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -21,7 +21,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background: linear-gradient(90deg, rgba(48, 48, 48, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://images.pexels.com/photos/7415326/pexels-photo-7415326.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background: linear-gradient(90deg, rgba(27, 27, 27, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://images.unsplash.com/photo-1581177094826-3b9a100bf887?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -29,11 +29,11 @@
 
 .register-container .card,
 .login-container .card {
-    width: 400px;
+    width: 350px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff0d;
+    background-color: #ffffff06;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 2px solid rgb(172, 172, 172);

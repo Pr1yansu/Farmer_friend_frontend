@@ -12,6 +12,7 @@ const options = ["crops", "fertilizer"];
 const Home = () => {
   const [mode, setMode] = useState("crops");
   const [selectMode, setSelectMode] = useState();
+
   return (
     <section className={styles.homeSection}>
       {mode === "crops" && (

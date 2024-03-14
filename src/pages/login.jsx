@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "../styles/login.module.css";
 import { Eye, EyeOff, Loader2, SendHorizonal } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useLoginStore } from "../store/login-store";
 
 const Login = () => {
   const navigate = useNavigate();
-
-  const [tab, setTab] = useState("register");
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState();
-  const [mounted, setMounted] = useState(false);
+  const {
+    tab,
+    email,
+    password,
+    loading,
+    showPassword,
+    username,
+    mounted,
+    setMounted,
+    setTab,
+    setEmail,
+    setPassword,
+    setLoading,
+    setShowPassword,
+    setUsername,
+  } = useLoginStore();
 
   useEffect(() => {
     setMounted(true);
@@ -49,7 +58,7 @@ const Login = () => {
       if (data.message) {
         toast.success(data.message);
         localStorage.setItem("token", data.token);
-        navigate("/");
+        window.location.reload();
       }
       if (data.error) {
         if (data.error === "Bad credentials") {
@@ -111,6 +120,8 @@ const Login = () => {
       );
       if (data.user) {
         toast.success(`Welcome ${data.user.name}`);
+        await login(email, password);
+        window.location.reload();
       }
       if (data.error) {
         toast.error(data.error);
