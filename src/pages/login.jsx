@@ -245,7 +245,7 @@ const Login = () => {
                 </div>
               </div>
               <div className={styles["form-link"]}>
-                Don't have an account?{" "}
+                Don't have an account?
                 <span onClick={() => setTab("register")}>Register</span>
               </div>
               <button type="submit">
