@@ -2,23 +2,16 @@ import React, { useEffect } from "react";
 import { LogOut, User2 } from "lucide-react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/nav-bar.module.css";
-import useUserStore from "../../store/user-store";
+import { useUserStore } from "../../store/user-store";
 
 const Navbar = () => {
-  const { user, fetchUser } = useUserStore();
+  const { user } = useUserStore();
   const navigate = useNavigate();
   const location = useLocation();
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      fetchUser(token);
-    }
-  }, [fetchUser]);
   const navLinks = [
     { title: "Home", path: "/" },
     { title: "Contact", path: "/contact" },
   ];
-
   return (
     <div
       className={styles.navContainer}
@@ -53,7 +46,10 @@ const Navbar = () => {
               <User2
                 size={24}
                 style={{
-                  color: location.pathname !== "/" && "black",
+                  color:
+                    location.pathname === "/" || location.pathname === "/login"
+                      ? "white"
+                      : "black",
                 }}
               />
             </Link>
@@ -66,8 +62,15 @@ const Navbar = () => {
             >
               <LogOut
                 size={24}
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  navigate("/");
+                }}
                 style={{
-                  color: location.pathname !== "/" && "black",
+                  color:
+                    location.pathname === "/" || location.pathname === "/login"
+                      ? "white"
+                      : "black",
                 }}
               />
             </button>
@@ -78,8 +81,14 @@ const Navbar = () => {
             onClick={() => navigate("/login")}
             className={styles.login}
             style={{
-              filter: location.pathname !== "/" && "invert(1)",
-              WebkitFilter: location.pathname !== "/" && "invert(1)",
+              filter:
+                location.pathname === "/" || location.pathname === "/login"
+                  ? "none"
+                  : "invert(1)",
+              WebkitFilter:
+                location.pathname === "/" || location.pathname === "/login"
+                  ? "none"
+                  : "invert(1)",
             }}
           />
         )}

@@ -1,8 +1,7 @@
-// userStore.js
 import axios from "axios";
 import { create } from "zustand";
 
-const useUserStore = create((set) => ({
+export const useUserStore = create((set) => ({
   user: null,
   fetchUser: async (token) => {
     try {
@@ -21,5 +20,3 @@ const useUserStore = create((set) => ({
     }
   },
 }));
-
-export default useUserStore;
