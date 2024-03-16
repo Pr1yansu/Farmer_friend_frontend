@@ -1,11 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
 .cropsPage {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 150px;
-    font-size: 2.5rem;
+    margin-top: 70px;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;;
+    background-color: #12372A;
+}
+.cropsLoad{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+    height: 100vh;
+    font-family: "Nanum Pen Script";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 240px;
+    background-color: #12372A;
+    color: #E8751A;
+}
+.cropsPage h1 {
+    margin-bottom: 1rem;
+    color: #FBFADA;
+}
+.cropsPage h1 span {
+    color: #E4A951;
+    text-transform: capitalize;
+    font-family: "Plante",serif;
+    font-size: 150px;
+}
+
+.cropsPage h2 {
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 20px;
-    font-family: "Arial", sans-serif;
+    font-family: 'Poppins', sans-serif;
+    color: #FBFADA;
+}
+
+.cropsPage h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    color: #ADBC9F;
+}
+.cropsPage p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    text-indent: 5px;
+    color: #E8751A;
+}
+
+.nanum_pen {
+    font-family: "Nanum Pen Script";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 70px;
+  }
+
+.infoBox{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 2fr));
+    grid-auto-rows: minmax(1fr, auto);
+    gap: 10px;
+    /* border: #E8751A 2px solid; */
+}
+
+.info{
+    /* border: #cc9e78 2px solid; */
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.13); /* Transparent white background */
+    backdrop-filter: blur(100px);
+    text-transform: capitalize;
 }
