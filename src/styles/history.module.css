@@ -1,0 +1,82 @@
+.container{
+    height: 100%;
+    /* border: 1px solid red; */
+    padding: 100px;
+    background-color: #1b4939;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container h1{
+    font-size: 100px;
+    font-family: "Plante";
+    font-weight: 400;
+    font-style: normal;
+    color: #FFD23F;
+    margin-bottom: 30px;
+}
+
+.headings{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    /* border: 2px solid blue; */
+    background-color: #ffd23f46;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 27px;
+    font-family: "Roboto", sans-serif;
+    color: #E8751A;
+}
+
+.datas{
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.rows{
+    display: flex;
+    justify-content: space-evenly;
+    /* border: 1px solid #FFD23F; */
+    padding: 10px;
+    text-transform: capitalize; 
+    background-color: #ADBC9F;
+    border-radius: 6px;
+    font-family: "Poppins";
+}
+
+.rows p:first-child{
+    width: 80px;
+    font-size: 25px;
+}
+
+.rows p{
+    width: 270px;
+    font-size: 20px;
+    color: #12372A;
+}
+
+.rows p:last-child{
+    width: 450px;
+    font-size: 25px;
+}
+
+.test{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+    height: 100vh;
+    font-family: "Plante";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 140px;
+    background-color: #12372A;
+    color: #E8751A;
+}

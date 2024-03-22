@@ -17,10 +17,10 @@
     justify-content: center;
     margin-top: 70px;
     height: 100vh;
-    font-family: "Nanum Pen Script";
+    font-family: "Plante";
     font-weight: 400;
     font-style: normal;
-    font-size: 240px;
+    font-size: 140px;
     background-color: #12372A;
     color: #E8751A;
 }
@@ -30,9 +30,11 @@
 }
 .cropsPage h1 span {
     color: #E4A951;
+    font-weight: 400;
     text-transform: capitalize;
-    font-family: "Plante",serif;
-    font-size: 150px;
+    font-family: "Plante";
+    font-style: normal;
+    font-size: 100px;
 }
 
 .cropsPage h2 {
