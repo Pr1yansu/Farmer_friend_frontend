@@ -12,6 +12,7 @@ import ImageUploadModal from "./components/modal/image-uploader";
 const Home = lazy(() => import("./pages/home"));
 const Contact = lazy(() => import("./pages/contact"));
 const Crops = lazy(() => import("./pages/crops"));
+const History = lazy(()=> import("./pages/history"));
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/crops/:cropId" element={<Crops />} />
+              <Route path="/history" element={<History/>}/>
               <Route path="/fertilizer/:fertilizerId" element={<Contact />} />
             </Routes>
           </Suspense>
