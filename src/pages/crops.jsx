@@ -4,6 +4,7 @@ import styles from "../styles/crops.module.css";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Loader from "../components/ui/loader";
 
 const Crops = () => {
   const [data, setData] = useState({});
@@ -21,31 +22,24 @@ const Crops = () => {
       try {
         const cropData = await axios.get(`${url}/crop/${cropId}`);
         if (cropData.status !== null) {
-          try {
-            const history = await axios.post(
-              `${serverUrl}/api/history/create`,
-              {
-                name: cropId,
-                date: new Date(),
-                desc: `Viewed ${cropId} farming process`,
+          const history = await axios.post(
+            `${serverUrl}/api/history/create`,
+            {
+              name: cropId,
+              date: new Date(),
+              desc: `Viewed ${cropId} farming process`,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-              }
-            );
-            if (history.status === 200) {
-              toast.success("History created");
             }
-            console.log(history);
-          } catch (error) {
-            console.log(error);
-            toast.error("Failed to create history");
+          );
+          if (history.status === 200) {
+            toast.success("History created");
           }
         }
-        // console.log(cropData.data);
         let trimmedString = cropData.data.replace(/^```json\n|```$/g, "");
         console.log(JSON.parse(trimmedString));
         setData(JSON.parse(trimmedString));
@@ -62,7 +56,7 @@ const Crops = () => {
   return (
     <>
       {loading ? (
-        <div className={styles.cropsLoad}>Loading...</div>
+        <Loader />
       ) : (
         <section className={styles.cropsPage}>
           <div className="container">

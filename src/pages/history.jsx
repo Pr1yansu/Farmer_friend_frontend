@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import styles from "../styles/history.module.css";
 
+import Loader from "../components/ui/loader";
 const History = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [history, setHistory] = useState([]);
-
   useEffect(() => {
     const url = process.env.REACT_APP_SERVER_URL;
     const token = localStorage.getItem("token");
@@ -24,7 +24,7 @@ const History = () => {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
@@ -40,7 +40,6 @@ const History = () => {
     };
     fecthHistory();
   }, []);
-
   // ! Paginantion
   const itemsPerPage = 5;
   const [itemOffset, setItemOffset] = useState(0);
@@ -60,7 +59,7 @@ const History = () => {
   return (
     <>
       {loading ? (
-        <div>Loading...</div>
+       <Loader />
       ) : (
         <>
           <main className={styles.container}>

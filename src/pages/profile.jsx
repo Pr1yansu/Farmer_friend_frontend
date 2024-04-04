@@ -6,23 +6,46 @@ import { useModalStore } from "../store/modal";
 import Loader from "../components/ui/loader";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Eye, EyeOff, Loader2, Trash2 } from "lucide-react";
 
 const Profile = () => {
   const { user } = useUserStore();
   const { openModal } = useModalStore();
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [newpassword, setNewpassword] = useState('');
-  const [confirmpassword, setConfirmpassword] = useState('');
-  const [number, setNumber] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState("");
+  const [newpassword, setNewpassword] = useState("");
+  const [confirmpassword, setConfirmpassword] = useState("");
+  const [number, setNumber] = useState("");
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return navigate("/login");
   }, [navigate]);
+
+  const handleImageDelete = async () => {
+    try {
+      setLoading(true);
+      const url = process.env.REACT_APP_SERVER_URL;
+      const token = localStorage.getItem("token");
+      console.log(url);
+      const response = await axios.delete(`${url}/auth/users/delete-image`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success(response.data);
+      window.location.reload();
+    } catch (error) {
+      toast.error(error.response.data);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -33,13 +56,17 @@ const Profile = () => {
               <div className={styles.dashboard}>
                 <div className={styles.menu_head}>Dashboard</div>
                 <ul className={styles.menu_items}>
-                  {["My Tasks", "Manage Team", "Hours Reports", "Edit Time", "Settings"].map(
-                    (item, index) => (
-                      <Link to={"/"} key={index}>
-                        <li>{item}</li>
-                      </Link>
-                    )
-                  )}
+                  {[
+                    "My Tasks",
+                    "Manage Team",
+                    "Hours Reports",
+                    "Edit Time",
+                    "Settings",
+                  ].map((item, index) => (
+                    <Link to={"/"} key={index}>
+                      <li>{item}</li>
+                    </Link>
+                  ))}
                 </ul>
                 <button
                   className={styles.signOut}
@@ -87,7 +114,20 @@ const Profile = () => {
                   >
                     {user.image ? "Change Image" : "Upload Image"}
                   </button>
-                  <button className={styles.btn2}>Delete</button>
+                  {user.image && (
+                    <button
+                      className={styles.btn2}
+                      onClick={handleImageDelete}
+                      disabled={loading}
+                    >
+                      Delete{" "}
+                      {loading ? (
+                        <Loader2 className="animate-spin" />
+                      ) : (
+                        <Trash2 />
+                      )}
+                    </button>
+                  )}
                 </div>
               </div>
               <hr />
@@ -100,12 +140,10 @@ const Profile = () => {
                     type="text"
                     id="UserName"
                     className=""
-                    placeholder="eg. Jai Shree Ram"
-                    onChange={
-                      (e) => {
-                        setUsername(e.target.value);
-                      }
-                    }
+                    placeholder="Enter your name here..."
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
                   />
                 </div>
                 <div className={styles.infoD1}>
@@ -115,22 +153,23 @@ const Profile = () => {
                       type="email"
                       id="LastName"
                       className={styles.email}
-                      placeholder="eg. JaiShreeRam@gmail.com"
-                      onChange={
-                        (e) => {
-                          setEmail(e.target.value);
-                        }
-                      }
+                      placeholder="Enter your email here..."
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
                     />
                   </div>
                   <div>
                     <label htmlFor="Phone">Phone Number</label>
-                    <input type="number" id="Phone" className={styles.phone} placeholder="eg. 9874563210"
-                      onChange={
-                        (e) => {
-                          setNumber(e.target.value);
-                        }
-                      } />
+                    <input
+                      type="number"
+                      id="Phone"
+                      className={styles.phone}
+                      placeholder="Enter your phone number here..."
+                      onChange={(e) => {
+                        setNumber(e.target.value);
+                      }}
+                    />
                   </div>
                 </div>
               </form>
@@ -139,34 +178,36 @@ const Profile = () => {
             <div className={styles.password}>
               <form onSubmit={(e) => e.preventDefault()}>
                 <div className={styles.infoD1}>
-                  <div>
+                  <div className={styles.passwordDiv}>
                     <label htmlFor="CurrentPassword">Current Password</label>
-                    <input type="password" id="CurrentPassword"
-                      onChange={
-                        (e) => {
-                          setPassword(e.target.value);
-                        }
-                      } />
+                    <input
+                      type="password"
+                      id="CurrentPassword"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                    {showCurrentPassword ? <Eye /> : <EyeOff />}
                   </div>
                   <div>
                     <label htmlFor="NewPassword">New Password</label>
-                    <input type="password" id="NewPassword"
-                      onChange={
-                        (e) => {
-                          setNewpassword(e.target.value);
-                        }
-                      }
+                    <input
+                      type="password"
+                      id="NewPassword"
+                      onChange={(e) => {
+                        setNewpassword(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
                 <div className={styles.infoD2}>
                   <label htmlFor="confirm_password">Confirm New Password</label>
-                  <input type="password" id="confirm_password"
-                    onChange={
-                      (e) => {
-                        setConfirmpassword(e.target.value);
-                      }
-                    }
+                  <input
+                    type="password"
+                    id="confirm_password"
+                    onChange={(e) => {
+                      setConfirmpassword(e.target.value);
+                    }}
                   />
                 </div>
                 <div className={styles.submission}>
@@ -181,43 +222,43 @@ const Profile = () => {
                   </button>
                   <button
                     className={styles.btn1}
-                    onClick={
-                      async () => {
-                        if (newpassword === confirmpassword) {
-                          const token = localStorage.getItem("token");
-                          const headers = {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                          };
-                          await axios.put(`${process.env.REACT_APP_SERVER_URL}/auth/users/update`
-                            ,
+                    onClick={async () => {
+                      if (newpassword === confirmpassword) {
+                        const token = localStorage.getItem("token");
+                        const headers = {
+                          Authorization: `Bearer ${token}`,
+                          "Content-Type": "application/json",
+                        };
+                        await axios
+                          .put(
+                            `${process.env.REACT_APP_SERVER_URL}/auth/users/update`,
                             {
                               name: username,
                               email,
                               password: password,
                               phone_number: number,
-                              new_password: newpassword
-
-                            }, { headers }).then(
-                              (response) => {
-                                console.log("Success", response)
-                                toast.success("User successfully updated!");
-                              }
-                            ).catch(
-                              (error) => {
-                                console.log("error", error);
-                                toast.error("Error!");
-                              }
-                            )
-                        }
-                        else {
-                          console.log("failuser");
-                          toast.error("Password and Confirm Password must be same!")
-                        }
+                              new_password: newpassword,
+                            },
+                            { headers }
+                          )
+                          .then((response) => {
+                            console.log("Success", response);
+                            toast.success("User successfully updated!");
+                          })
+                          .catch((error) => {
+                            console.log("error", error);
+                            toast.error("Error!");
+                          });
+                      } else {
+                        console.log("failuser");
+                        toast.error(
+                          "Password and Confirm Password must be same!"
+                        );
                       }
-                    }
-
-                  >Save Changes</button>
+                    }}
+                  >
+                    Save Changes
+                  </button>
                 </div>
               </form>
             </div>

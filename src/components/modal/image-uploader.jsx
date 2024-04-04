@@ -42,7 +42,7 @@ const ImageUploadModal = () => {
         window.location.reload();
       }
     } catch (error) {
-      toast.error("Error uploading image");
+      toast.error(error.response.data);
       return;
     } finally {
       setLoading(false);

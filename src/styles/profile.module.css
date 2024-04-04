@@ -64,6 +64,8 @@
 .LeftContent>img {
     width: 100px;
     height: 100px;
+    object-position: center;
+    object-fit: cover;
     border-radius: 50%;
     padding: 10px;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -113,7 +115,6 @@
     height: 56px;
     padding: 6px 2px;
     border-radius: 8px;
-    border: 1px solid #181818;
     background: #202020;
     color: var(--white, #fff);
     text-align: center;
@@ -121,6 +122,12 @@
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+    transition: all 0.3s;
+}
+
+.btn1:hover {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #202020bb;
 }
 
 .btn2 {
@@ -128,13 +135,28 @@
     height: 56px;
     padding: 8px 0px;
     border-radius: 8px;
-    border: 1px solid #202020;
-    color: #1b1b1b;
+    background-color: #d50f0fbc;
+    color: #fff;
     text-align: center;
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s;
+}
+
+.btn2:hover {
+    background: #d50f0f8e;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn2 svg {
+    width: 18px;
+    height: 18px;
 }
 
 .info {
@@ -187,7 +209,8 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width: 497px;
+    width: 492px;
+    position: relative;
 }
 
 .infoD2 {
@@ -195,11 +218,20 @@
     flex-direction: column;
     gap: 16px;
     width: 100%;
+    position: relative;
 }
 
 .password {
     grid-area: 6 / 1 / 9 / 13;
     height: auto;
+}
+
+.passwordDiv svg {
+    position: absolute;
+    cursor: pointer;
+    top: 45%;
+    right: 4px;
+    transform: translate(-50%, 50%);
 }
 
 .submission {

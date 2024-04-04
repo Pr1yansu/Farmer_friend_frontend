@@ -6,6 +6,7 @@ import {
   CropInputFields,
   FertilizerInputFields,
 } from "../components/ui/input-field.jsx";
+import Loader from "../components/ui/loader.jsx";
 
 const options = ["crops", "fertilizer"];
 
