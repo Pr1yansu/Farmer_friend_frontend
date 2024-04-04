@@ -14,7 +14,7 @@
     -ms-overflow-style: none;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     display: none;
 }
 
@@ -56,6 +56,12 @@ h6 {
     font-style: normal;
 }
 
+.MuiDataGrid-topContainer div div {
+    background-color: #31ab80;
+    color: #ffffff;
+}
+
+
 .btn {
     padding: 8px 15px;
     border-radius: 5px;
@@ -65,6 +71,14 @@ h6 {
     transition: all 0.3s;
     background-color: transparent;
     color: rgb(41, 41, 41);
+}
+
+.super-app-theme--even {
+    background-color: #ffffff;
+}
+
+.super-app-theme--odd {
+    background-color: #f7c25f5e;
 }
 
 .btn-default {
