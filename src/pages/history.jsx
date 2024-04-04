@@ -1,22 +1,33 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 import styles from "../styles/history.module.css";
+
 const History = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [history,setHistory] = useState();
+  const [history, setHistory] = useState([]);
+
   useEffect(() => {
     const url = process.env.REACT_APP_SERVER_URL;
-    const fecthHistory = async ()=>{
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return navigate("/login");
+    }
+    const fecthHistory = async () => {
       try {
-        const {data} = await axios.post(`${url}/api/history/view`,{
-
-        }, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const { data } = await axios.post(
+          `${url}/api/history/view`,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         console.log(data);
         if (data != null) {
           setHistory(data);
@@ -30,31 +41,63 @@ const History = () => {
     fecthHistory();
   }, []);
 
+  // ! Paginantion
+  const itemsPerPage = 5;
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + itemsPerPage;
+  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  const currentItems = history.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(history.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % history.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
 
   return (
     <>
       {loading ? (
-        <div className={styles.test}>Loading...</div>
+        <div>Loading...</div>
       ) : (
-        <main className={styles.container}>
-          <h1>History</h1>
-          <div className={styles.headings}>
-            <h2 style={{width: "80px"}}>Name</h2>
-            <h2 style={{width: "270px"}}>Date</h2>
-            <h2 style={{width: "450px"}}>Description</h2>
-          </div>
-          <div className={styles.datas}>
-              {history.map((item, index) => (
-                <div key={index} className={styles.rows}>
-                  <p>{item.name}</p>
-                  <p>{item.date}</p>
-                  <p>{item.desc}</p>
-                </div>
-              ))}
-          </div>
-        </main>
+        <>
+          <main className={styles.container}>
+            <h1>History</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentItems.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.name}</td>
+                    <td>{item.date.slice(0, 10)}</td>
+                    <td>{item.desc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            renderOnZeroPageCount={null}
+            className={styles.pages}
+            pageClassName={styles.pageLi}
+            pageLinkClassName	={styles.pageA}
+          />
+          </main>
+        </>
       )}
-      {/* <h1 className="test">HI</h1> */}
     </>
   );
 };

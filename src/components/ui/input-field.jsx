@@ -74,6 +74,7 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
         rainfall
       ) {
         try {
+          toast.loading("Loading");
           const { data } = await axios.post(
             `${process.env.REACT_APP_MODEL_URL}/predict_crop`,
             {
@@ -91,7 +92,12 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
               },
             }
           );
+          if (!data) {
+            toast.dismiss();
+            console.log("no data found");
+          }
           if (data.predicted_crop) {
+            toast.dismiss();
             navigate(`/crops/${data.predicted_crop}`);
           } else {
             toast.error("Error predicting crop");
@@ -104,7 +110,9 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
             setRainfall(0);
             setInputMode("nitrogen");
           }
+          toast.dismiss();
         } catch (error) {
+          toast.dismiss();
           toast.error("Error predicting crop");
           console.log(error);
         }
@@ -222,6 +230,9 @@ export const FertilizerInputFields = ({ selectMode, setSelectMode }) => {
               },
             }
           );
+          if (!data) {
+            console.log("no data found");
+          }
           if (data.predicted_crop) {
             navigate(`/fertilizer/${data.predicted_crop}`);
           } else {

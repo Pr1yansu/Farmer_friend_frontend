@@ -1,5 +1,5 @@
 .container{
-    height: 100%;
+    min-height: 100vh;
     /* border: 1px solid red; */
     padding: 100px;
     background-color: #1b4939;
@@ -17,66 +17,63 @@
     color: #FFD23F;
     margin-bottom: 30px;
 }
-
-.headings{
-    display: flex;
+table{
     width: 100%;
-    justify-content: space-evenly;
+    /* border-collapse: collapse; */
+    margin-bottom: 20px;
+}
+
+thead{
     /* border: 2px solid blue; */
-    background-color: #ffd23f46;
-    border-radius: 6px;
-    padding: 10px;
     font-size: 27px;
     font-family: "Roboto", sans-serif;
-    color: #E8751A;
+    color: #d39e72;
 }
 
-.datas{
-    width: 100%;
-    margin-top: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
+th{
+    background-color: #0f3629;
+    padding: 8px;
+    border-bottom: 3px solid #E8751A;
 }
 
-.rows{
-    display: flex;
-    justify-content: space-evenly;
-    /* border: 1px solid #FFD23F; */
-    padding: 10px;
-    text-transform: capitalize; 
+tbody{
+    border-collapse: collapse;
+}
+
+tr:nth-child(odd){
+    background-color: white;
+}
+tr:nth-child(even){
     background-color: #ADBC9F;
-    border-radius: 6px;
+}
+tbody,td{
+    /* border: 1px solid #E8751A; */
+    padding: 18px;
+    text-align: center;
+    text-transform: capitalize; 
     font-family: "Poppins";
 }
 
-.rows p:first-child{
-    width: 80px;
-    font-size: 25px;
-}
-
-.rows p{
-    width: 270px;
-    font-size: 20px;
-    color: #12372A;
-}
-
-.rows p:last-child{
-    width: 450px;
-    font-size: 25px;
-}
-
-.test{
+.pages{
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    margin-top: 70px;
-    height: 100vh;
-    font-family: "Plante";
-    font-weight: 400;
-    font-style: normal;
-    font-size: 140px;
-    background-color: #12372A;
-    color: #E8751A;
+    align-items: center;
+    gap: 20px;
+    /* border: 1px solid red; */
+    height: 80px;
+}
+
+.pageLi{
+    width: 50px;
+    padding: 2px;
+    border: 1px solid #0f3629;
+    background-color: #ADBC9F;
+    text-align: center;
+    padding: 10px;
+    border-radius: 100%;
+}
+.pageA{
+    color: #0f3629;
+    font-size: 22px;
 }
