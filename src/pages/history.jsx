@@ -2,14 +2,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import ReactPaginate from "react-paginate";
-import styles from "../styles/history.module.css";
-
+import { DataGrid } from "@mui/x-data-grid";
 import Loader from "../components/ui/loader";
+import { useUserStore } from "../store/user-store";
+
 const History = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const { user } = useUserStore();
+  const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
+
   useEffect(() => {
     const url = process.env.REACT_APP_SERVER_URL;
     const token = localStorage.getItem("token");
@@ -18,6 +20,7 @@ const History = () => {
     }
     const fecthHistory = async () => {
       try {
+        setLoading(true);
         const { data } = await axios.post(
           `${url}/api/history/view`,
           {},
@@ -28,74 +31,97 @@ const History = () => {
             },
           }
         );
-        console.log(data);
         if (data != null) {
-          setHistory(data);
+          const idIncludedHistory = data.map((item, index) => {
+            const date = new Date(item.date);
+            return {
+              id: index + 1,
+              name: item.name,
+              date: date.toLocaleTimeString() + " " + date.toDateString(),
+              desc: item.desc,
+            };
+          });
+          setHistory(idIncludedHistory);
           toast.success("This is your History");
-          setLoading(false);
         }
       } catch (error) {
-        console.log(error);
+        toast.error("Error fetching history");
+      } finally {
+        setLoading(false);
       }
     };
     fecthHistory();
   }, []);
-  // ! Paginantion
-  const itemsPerPage = 5;
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = history.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(history.length / itemsPerPage);
 
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % history.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-  };
+  const columns = [
+    { field: "id", headerName: "ID", width: 120 },
+    {
+      field: "name",
+      headerName: "Name",
+      width: 250,
+      editable: true,
+    },
+    {
+      field: "date",
+      headerName: "Date",
+      width: 250,
+      editable: true,
+    },
+    {
+      field: "desc",
+      headerName: "Description",
+      width: 350,
+      editable: true,
+    },
+  ];
 
   return (
     <>
       {loading ? (
-       <Loader />
+        <Loader />
       ) : (
-        <>
-          <main className={styles.container}>
-            <h1>History</h1>
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Date</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.name}</td>
-                    <td>{item.date.slice(0, 10)}</td>
-                    <td>{item.desc}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-            previousLabel="< previous"
-            renderOnZeroPageCount={null}
-            className={styles.pages}
-            pageClassName={styles.pageLi}
-            pageLinkClassName	={styles.pageA}
-          />
-          </main>
-        </>
+        <div
+          style={{
+            backgroundColor: "white",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <section>
+            <div>
+              <h4
+                style={{
+                  marginBottom: "1rem",
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: "1.5rem",
+                  textTransform: "capitalize",
+                }}
+              >
+                {user ? user.name : "User"}'s history
+              </h4>
+              <DataGrid
+                rows={history}
+                columns={columns}
+                pageSizeOptions={[5]}
+                initialState={{
+                  pagination: {
+                    paginationModel: { page: 0, pageSize: 5 },
+                  },
+                }}
+                checkboxSelection
+                getRowClassName={(params) =>
+                  params.row.id % 2 === 0
+                    ? "super-app-theme--odd"
+                    : "super-app-theme--even"
+                }
+                style={{ width: "100%", maxWidth: "1240px" }}
+              />
+            </div>
+          </section>
+        </div>
       )}
     </>
   );
