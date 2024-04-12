@@ -7,7 +7,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background: linear-gradient(90deg, rgba(48, 48, 48, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://images.unsplash.com/photo-1581177094826-3b9a100bf887?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background: linear-gradient(90deg, rgba(48, 48, 48, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("/public/assets/images/Farm.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -21,7 +21,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background: linear-gradient(90deg, rgba(27, 27, 27, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("https://images.unsplash.com/photo-1581177094826-3b9a100bf887?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background: linear-gradient(90deg, rgba(27, 27, 27, 0.798) 0%, rgba(255, 255, 255, 0.1) 100%), url("/public/assets/images/Farm.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -29,7 +29,8 @@
 
 .register-container .card,
 .login-container .card {
-    width: 350px;
+    max-width: 450px;
+    width: 100%;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -58,6 +59,29 @@
     background-color: #000000;
 }
 
+.login_form_group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.login_form_group div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.login_form_group span {
+    font-size: 14px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.login_form_group a:hover {
+    text-decoration: underline;
+}
+
 .register-container .form-group,
 .login-container .form-group {
     display: flex;
@@ -65,19 +89,22 @@
     gap: 5px;
 }
 
+.register_form_group {
+    margin: 20px 0;
+}
+
 .register-container .form-link,
 .login-container .form-link {
     text-align: end;
-    margin-top: 10px;
     font-size: 0.8rem;
     color: #c7c7c7;
 }
 
 .register-container .form-link>span,
 .login-container .form-link>span {
-    color: #000000;
+    color: #ffffff;
     cursor: pointer;
-    font-size: medium;
+    font-size: small;
     transition: all 0.3s;
 }
 
@@ -96,7 +123,7 @@
     outline: none;
     border: 1px solid #e0e0e0;
     font-size: 16px;
-    color: #000000;
+    color: #fff;
     font-weight: 400;
     background-color: transparent;
     width: 100%;
