@@ -31,12 +31,15 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
     e.preventDefault();
     if (nitrogen) {
       setInputMode("phosphorus");
+      document.getElementById("phosphorus").focus();
     }
     if (phosphorus) {
       setInputMode("potassium");
+      document.getElementById("potassium").focus();
     }
     if (potassium) {
       setInputMode("temperature");
+      document.getElementById("temperature").focus();
     }
     if (temperature) {
       if (temperature < 0) {
@@ -48,9 +51,11 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
         return;
       }
       setInputMode("humidity");
+      document.getElementById("humidity").focus();
     }
     if (humidity) {
       setInputMode("ph");
+      document.getElementById("ph").focus();
     }
     if (ph) {
       if (ph < 0) {
@@ -62,6 +67,7 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
         return;
       }
       setInputMode("rainfall");
+      document.getElementById("rainfall").focus();
     }
     if (rainfall) {
       if (
@@ -127,15 +133,19 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
           <input
             type="number"
             placeholder="Nitrogen"
+            id="nitrogen"
             className={styles.inputField}
+            value={nitrogen}
             onChange={(e) => setNitrogen(e.target.value)}
           />
         )}
         {inputMode === "phosphorus" && (
           <input
             type="number"
+            id="phosphorus"
             placeholder="Phosphorus"
             className={styles.inputField}
+            value={phosphorus}
             onChange={(e) => setPhosphorus(e.target.value)}
           />
         )}
@@ -144,6 +154,7 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
             type="number"
             placeholder="Potassium"
             className={styles.inputField}
+            value={potassium}
             onChange={(e) => setPotassium(e.target.value)}
           />
         )}
@@ -151,7 +162,9 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
           <input
             type="number"
             placeholder="Temperature"
+            id="temperature"
             className={styles.inputField}
+            value={temperature}
             onChange={(e) => setTemperature(e.target.value)}
           />
         )}
@@ -159,7 +172,9 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
           <input
             type="number"
             placeholder="Humidity"
+            id="humidity"
             className={styles.inputField}
+            value={humidity}
             onChange={(e) => setHumidity(e.target.value)}
           />
         )}
@@ -167,7 +182,9 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
           <input
             type="number"
             placeholder="PH"
+            id="ph"
             className={styles.inputField}
+            value={ph}
             onChange={(e) => setPh(e.target.value)}
           />
         )}
@@ -175,7 +192,9 @@ export const CropInputFields = ({ selectMode, setSelectMode }) => {
           <input
             type="number"
             placeholder="Rainfall"
+            id="rainfall"
             className={styles.inputField}
+            value={rainfall}
             onChange={(e) => setRainfall(e.target.value)}
           />
         )}
@@ -210,15 +229,17 @@ export const FertilizerInputFields = ({ selectMode, setSelectMode }) => {
     e.preventDefault();
     if (nitrogen) {
       setInputMode("phosphorus");
+      document.getElementById("phosphorus").focus();
     }
     if (phosphorus) {
       setInputMode("potassium");
+      document.getElementById("potassium").focus();
     }
     if (potassium) {
       if (nitrogen && phosphorus && potassium) {
         try {
           const { data } = await axios.post(
-            `${process.env.REACT_APP_MODEL_URL}/predict_fert`,
+            `${process.env.REACT_APP_MODEL_URL}/predict_fart`,
             {
               N: nitrogen,
               P: phosphorus,
@@ -252,6 +273,8 @@ export const FertilizerInputFields = ({ selectMode, setSelectMode }) => {
           <input
             type="number"
             placeholder="Nitrogen"
+            id="nitrogen"
+            value={nitrogen}
             className={styles.inputField}
             onChange={(e) => setNitrogen(e.target.value)}
           />
@@ -260,6 +283,8 @@ export const FertilizerInputFields = ({ selectMode, setSelectMode }) => {
           <input
             type="number"
             placeholder="Phosphorus"
+            id="phosphorus"
+            value={phosphorus}
             className={styles.inputField}
             onChange={(e) => setPhosphorus(e.target.value)}
           />
@@ -268,6 +293,8 @@ export const FertilizerInputFields = ({ selectMode, setSelectMode }) => {
           <input
             type="number"
             placeholder="Potassium"
+            id="potassium"
+            value={potassium}
             className={styles.inputField}
             onChange={(e) => setPotassium(e.target.value)}
           />

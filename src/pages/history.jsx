@@ -11,6 +11,7 @@ const History = () => {
   const { user } = useUserStore();
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
+  const [redirecteTime, setRedirectTime] = useState(5);
 
   useEffect(() => {
     const url = process.env.REACT_APP_SERVER_URL;
@@ -51,7 +52,7 @@ const History = () => {
       }
     };
     fecthHistory();
-  }, []);
+  }, [navigate]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 120 },
@@ -74,6 +75,45 @@ const History = () => {
       editable: true,
     },
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRedirectTime((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [history]);
+
+  if (history.length < 1) {
+    if (redirecteTime === 0) {
+      navigate("/");
+    }
+    return (
+      <div
+        style={{
+          backgroundColor: "white",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <h2
+          style={{
+            fontWeight: "bold",
+            fontSize: "5rem",
+            textTransform: "capitalize",
+            textAlign: "center",
+            width: "1440px",
+            margin: "0 auto",
+          }}
+        >
+          No history found you will be redirected to the home page in{" "}
+          {redirecteTime}
+          seconds
+        </h2>
+      </div>
+    );
+  }
 
   return (
     <>

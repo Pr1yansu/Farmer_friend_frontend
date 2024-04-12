@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import styles from "../styles/login.module.css";
 import { Eye, EyeOff, Loader2, SendHorizonal } from "lucide-react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "../store/login-store";
+import styles from "../styles/login.module.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,13 +27,19 @@ const Login = () => {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+  }, [setMounted]);
 
   useEffect(() => {
     setUsername("");
     setEmail("");
     setPassword("");
-  }, [tab]);
+  }, [tab, setUsername, setEmail, setPassword]);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const login = async (email, password) => {
     try {
@@ -58,6 +64,10 @@ const Login = () => {
       if (data.message) {
         toast.success(data.message);
         localStorage.setItem("token", data.token);
+        localStorage.setItem(
+          "expirationTime",
+          data.expirationTime * 60 * 60 * 1000
+        );
         window.location.reload();
       }
       if (data.error) {
@@ -133,11 +143,39 @@ const Login = () => {
     }
   };
 
-  if (!mounted) return null;
+  const handleForgotPassword = async () => {
+    try {
+      if (email === "") {
+        toast.error("Please enter your email");
+        document.getElementById("email").focus();
+        return;
+      }
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/auth/users/forgot-password`,
+        {
+          email,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (data.message) {
+        toast.success(data.message);
+        return;
+      }
 
-  if (localStorage.getItem("token")) {
-    navigate("/");
-  }
+      if (data.error) {
+        toast.error(data.error);
+        return;
+      }
+    } catch (error) {
+      return;
+    }
+  };
+
+  if (!mounted) return null;
 
   return (
     <>
@@ -150,7 +188,7 @@ const Login = () => {
                 <label htmlFor="username">Username</label>
                 <input
                   type="text"
-                  placeholder="username"
+                  placeholder="enter your username here"
                   id="username"
                   name="username"
                   value={username}
@@ -165,7 +203,7 @@ const Login = () => {
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
-                  placeholder="email"
+                  placeholder="enter your email here"
                   id="email"
                   name="email"
                   value={email}
@@ -177,7 +215,8 @@ const Login = () => {
                 <div className={styles["password-container"]}>
                   <input
                     type={showPassword ? "text" : "password"}
-                    placeholder="password"
+                    password="password"
+                    placeholder="enter your password here"
                     id="password"
                     name="password"
                     value={password}
@@ -191,9 +230,11 @@ const Login = () => {
                   </div>
                 </div>
               </div>
-              <div className={styles["form-link"]}>
-                Already have an account?{" "}
-                <span onClick={() => setTab("login")}>Login</span>
+              <div className={styles.register_form_group}>
+                <div className={styles["form-link"]}>
+                  Already have an account?{" "}
+                  <span onClick={() => setTab("login")}>Login</span>
+                </div>
               </div>
               <button type="submit" disabled={loading}>
                 Register
@@ -215,7 +256,7 @@ const Login = () => {
                 <label htmlFor="email">Email</label>
                 <input
                   type="text"
-                  placeholder="email"
+                  placeholder="enter your email here"
                   id="email"
                   value={email}
                   name="email"
@@ -230,7 +271,7 @@ const Login = () => {
                 <div className={styles["password-container"]}>
                   <input
                     type={showPassword ? "text" : "password"}
-                    placeholder="password"
+                    password="enter your password here"
                     id="password"
                     name="password"
                     value={password}
@@ -244,9 +285,12 @@ const Login = () => {
                   </div>
                 </div>
               </div>
-              <div className={styles["form-link"]}>
-                Don't have an account?
-                <span onClick={() => setTab("register")}>Register</span>
+              <div className={styles.login_form_group}>
+                <span onClick={handleForgotPassword}>Forgot password?</span>
+                <div className={styles["form-link"]}>
+                  Don't have an account?
+                  <span onClick={() => setTab("register")}>Register</span>
+                </div>
               </div>
               <button type="submit">
                 Login

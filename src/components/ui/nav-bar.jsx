@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LogOut, User2 } from "lucide-react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/nav-bar.module.css";
@@ -8,11 +8,19 @@ const Navbar = () => {
   const { user } = useUserStore();
   const navigate = useNavigate();
   const location = useLocation();
-  const navLinks = [
+  const [navLinks, setNavLinks] = useState([
     { title: "Home", path: "/" },
     { title: "Contact", path: "/contact" },
-    { title: "History", path: "/history" },
-  ];
+  ]);
+  useEffect(() => {
+    if (user) {
+      setNavLinks([
+        { title: "Home", path: "/" },
+        { title: "History", path: "/history" },
+        { title: "Contact", path: "/contact" },
+      ]);
+    }
+  }, [user]);
   return (
     <div
       className={styles.navContainer}
