@@ -8,6 +8,7 @@ import Loader from "../components/ui/loader";
 
 const Crops = () => {
   const [data, setData] = useState({});
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const { cropId } = useParams();
   const navigate = useNavigate();
@@ -40,8 +41,9 @@ const Crops = () => {
             toast.success("History created");
           }
         }
-        let trimmedString = cropData.data.replace(/^```json\n|```$/g, "");
+        let trimmedString = cropData.data.cropDetails.replace(/^```json\n|```$/g, "");
         console.log(JSON.parse(trimmedString));
+        setImages(cropData.data.images);
         setData(JSON.parse(trimmedString));
         setLoading(false);
       } catch (error) {
@@ -64,6 +66,13 @@ const Crops = () => {
               <span>{crop}</span> FARMING PROCESS
             </h1>
             <div className="section">
+              <div className="imageflex">
+                {
+                  images.map((image, index) => (
+                    <img key={index} src={image} alt={"crop_image"} />
+                  ))
+                }
+              </div>
               <KeyValueRenderer data={data.farming_process} />
             </div>
           </div>
