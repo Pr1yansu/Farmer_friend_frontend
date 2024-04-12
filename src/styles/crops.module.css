@@ -7,10 +7,12 @@
     justify-content: center;
     margin-top: 70px;
     height: 100%;
-    font-family: 'Poppins', sans-serif;;
+    font-family: 'Poppins', sans-serif;
+    ;
     background-color: #12372A;
 }
-.cropsLoad{
+
+.cropsLoad {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,10 +26,12 @@
     background-color: #12372A;
     color: #E8751A;
 }
+
 .cropsPage h1 {
     margin-bottom: 1rem;
     color: #FBFADA;
 }
+
 .cropsPage h1 span {
     color: #E4A951;
     font-weight: 400;
@@ -50,6 +54,7 @@
     font-family: 'Poppins', sans-serif;
     color: #ADBC9F;
 }
+
 .cropsPage p {
     font-size: 1.2rem;
     font-weight: 400;
@@ -63,9 +68,9 @@
     font-weight: 400;
     font-style: normal;
     font-size: 70px;
-  }
+}
 
-.infoBox{
+.infoBox {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 2fr));
     grid-auto-rows: minmax(1fr, auto);
@@ -73,11 +78,20 @@
     /* border: #E8751A 2px solid; */
 }
 
-.info{
+.info {
     /* border: #cc9e78 2px solid; */
     padding: 15px;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.13); /* Transparent white background */
+    background: rgba(255, 255, 255, 0.13);
+    /* Transparent white background */
     backdrop-filter: blur(100px);
     text-transform: capitalize;
+}
+
+img {
+    width: 20%;
+    aspect-ratio: 1/1;
+    padding: 5px;
+    object-fit: cover;
+    border-radius: 8px;
 }
